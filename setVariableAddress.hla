@@ -1,4 +1,4 @@
-//setVariable.hla: Set a variable in the variable array using assembly language.
+//setVariableAddress.hla: Set a variable in the variable array using assembly language.
 
 program p;
 #include("stdlib.hhf");
@@ -11,8 +11,8 @@ program p;
 		ret();
 	end Variables;
 
-	procedure setVariable; @noframe; @nodisplay;
-	begin setVariable;
+	procedure setVariableAddress; @noframe; @nodisplay;
+	begin setVariableAddress;
 		//Pass Position using EAX;
 		//Pass Value using EBX;
 		//Pass VariableAddress using ECX;
@@ -22,9 +22,9 @@ program p;
 		mov( EBX, [ECX] );	
 
 		ret();
-	end setVariable;
+	end setVariableAddress;
 begin p;
-	stdout.put("setVariable.hla: Entrypoint.", nl);
+	stdout.put("setVariableAddress.hla: Entrypoint.", nl);
 	
 	mov( 4, EAX );
 	call Variables;
@@ -34,7 +34,7 @@ begin p;
 	mov( 0, EAX );
 	mov( 25, EBX );
 	
-	call setVariable;		
+	call setVariableAddress;		
 	
 		
 	pop( EAX );
