@@ -1,0 +1,44 @@
+//setVariable.hla: Set a variable in the variable array using assembly language.
+
+program p;
+#include("stdlib.hhf");
+
+	procedure Variables; @noframe; @nodisplay;
+	begin Variables;
+		//ArraySize is passed in via EAX.
+		intmul( 4, EAX ); //Size of element (in bytes) * ArraySize
+		mem.alloc( EAX );		
+		ret();
+	end Variables;
+
+	procedure setVariable; @noframe; @nodisplay;
+	begin setVariable;
+		//Pass Position using EAX;
+		//Pass Value using EBX;
+		//Pass VariableAddress using ECX;
+
+		intmul( 4, EAX );
+		add( EAX, ECX );
+		mov( EBX, [ECX] );	
+
+		ret();
+	end setVariable;
+begin p;
+	stdout.put("setVariable.hla: Entrypoint.", nl);
+	
+	mov( 4, EAX );
+	call Variables;
+	push( EAX );
+
+	mov( EAX, ECX );	
+	mov( 0, EAX );
+	mov( 25, EBX );
+	
+	call setVariable;		
+	
+		
+	pop( EAX );
+	mov( [EAX], EBX );
+	stdout.put("EBX: ", EBX, nl);
+	mem.free( EAX );
+end p;
